@@ -1,0 +1,22 @@
+! --- VLAN and Trunking Configuration ---
+!
+vlan 10
+ name Sales
+vlan 20
+ name HR
+!
+interface FastEthernet0/1
+ description PC0_Sales
+ switchport access vlan 10
+ switchport mode access
+!
+interface FastEthernet0/2
+ description PC2_HR
+ switchport access vlan 20
+ switchport mode access
+!
+interface GigabitEthernet0/1
+ description Link_to_Router_Trunk
+ switchport mode trunk
+!
+! --- End of Configuration ---
