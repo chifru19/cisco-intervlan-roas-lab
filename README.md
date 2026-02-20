@@ -22,7 +22,14 @@ The router uses sub-interfaces to provide a default gateway for each subnet.
 ### Switch0 (Infrastructure)
 * **Trunk Port (G0/1):** Configured as a trunk to pass tagged traffic for VLANs 1, 10, and 20 to the router.
 * **Access Ports:** Fa0/1 is assigned to VLAN 10; Fa0/2 is assigned to VLAN 20.
+### Verification Evidence
+Below are the confirmed ping results and interface statuses from the lab:
 
+**Router Sub-interface Status (Up/Up):**
+![Interface Status](Screenshot%202026-02-20%20at%2008.48.14.jpg)
+
+**Successful Cross-VLAN Pings:**
+![Ping Results](Screenshot%202026-02-19%20at%2022.20.16.jpg)
 ## Verification Results
 Successful end-to-end connectivity was verified via ICMP:
 1.  PC0 successfully pinged the local gateway (`192.168.10.1`).
