@@ -9,7 +9,25 @@ The network consists of a Cisco 2911 Router, a 2960 Switch, and two departmental
 * **VLAN 10 (Sales):** 192.168.10.0/24
 * **VLAN 20 (HR):** 192.168.20.0/24
 * **Encapsulation:** IEEE 802.1Q
+## 🛠️ Implementation Details
 
+### 1. Layer 2 Segmentation (VLANs)
+To reduce broadcast domains and improve security, I implemented **Virtual Local Area Networks (VLANs)**. 
+- **VLAN 10 (Sales)** was assigned to port `Fa0/1`.
+- **VLAN 20 (HR)** was assigned to port `Fa0/2`.
+- Ports were moved from the default VLAN 1 to their respective departmental segments to ensure isolation.
+
+### 2. IEEE 802.1Q Trunking
+A **Trunk Link** was established on interface `Gig0/1` of the switch. Using the **802.1Q** protocol, this link allows the switch to send "tagged" frames from multiple VLANs over a single physical cable to the router.
+
+### 3. Router-on-a-Stick (ROAS) Logic
+I configured the **Cisco 2911 Router** with logical sub-interfaces to serve as the Default Gateway for each VLAN.
+- **Sub-interface G0/0.10**: Handles traffic for 192.168.10.0/24.
+- **Sub-interface G0/0.20**: Handles traffic for 192.168.20.0/24.
+This allows inter-VLAN communication without requiring a separate physical router port for every network segment.
+
+### 4. Connectivity Verification
+Communication was confirmed through ICMP echo requests (pings). Successful replies were received between subnets, proving that the router is successfully de-encapsulating and re-routing traffic between the Sale and HR networks.
 
 
 ## Technical Configuration
